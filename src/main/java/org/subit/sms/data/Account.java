@@ -1,6 +1,5 @@
-package org.subit.sms.Data;
+package org.subit.sms.data;
 
-import cn.dev33.satoken.secure.SaSecureUtil;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

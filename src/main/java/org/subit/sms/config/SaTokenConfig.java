@@ -1,4 +1,4 @@
-package org.subit.sms.Config;
+package org.subit.sms.config;
 
 import cn.dev33.satoken.jwt.StpLogicJwtForStateless;
 import cn.dev33.satoken.stp.StpLogic;

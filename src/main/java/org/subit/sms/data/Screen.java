@@ -1,4 +1,4 @@
-package org.subit.sms.Data;
+package org.subit.sms.data;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

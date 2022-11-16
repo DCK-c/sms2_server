@@ -1,12 +1,10 @@
-package org.subit.sms.Data;
+package org.subit.sms.data;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.File;
-import java.sql.Date;
 import java.time.LocalDateTime;
 
 @Data

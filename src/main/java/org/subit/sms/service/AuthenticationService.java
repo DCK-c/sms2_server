@@ -1,26 +1,26 @@
-package org.subit.sms.Service;
+package org.subit.sms.service;
 
-import org.subit.sms.DTO.LoginDTO;
-import org.subit.sms.DTO.Response;
-import org.subit.sms.DTO.User;
+import org.subit.sms.dto.LoginDTO;
+import org.subit.sms.dto.Response;
+import org.subit.sms.dto.User;
 
 
 public interface AuthenticationService {
     /*
     provide login service
      */
-    public Response<LoginDTO> login(User user);
+    Response<LoginDTO> login(User user);
 
     /*
     logout user by username
      */
-    public Response<Object> logout(String username);
+    Response<Object> logout(String username);
 
     /*
     modify password
     user.password represent the new password due to frontend will check the same between new and old password
      */
-    public Response<Object> modifyPassword(User user);
+    Response<Object> modifyPassword(User user);
 
 
     /*
@@ -29,10 +29,10 @@ public interface AuthenticationService {
     /*
     insert this user to database, and send the activate link to his email
      */
-    public Response<Object> SendCaptcha(User user, String email);
+    Response<Object> SendCaptcha(User user, String email);
 
     /*
     verify the captcha and activate the account
      */
-    public Response<Object> activateAccount(String captcha);
+    Response<Object> activateAccount(String captcha);
 }

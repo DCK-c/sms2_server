@@ -1,4 +1,4 @@
-package org.subit.sms.DTO;
+package org.subit.sms.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

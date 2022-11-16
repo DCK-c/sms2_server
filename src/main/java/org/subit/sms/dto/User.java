@@ -1,4 +1,4 @@
-package org.subit.sms.DTO;
+package org.subit.sms.dto;
 
 public class User {
     private String username;

@@ -1,4 +1,4 @@
-package org.subit.sms.Controller;
+package org.subit.sms.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 
