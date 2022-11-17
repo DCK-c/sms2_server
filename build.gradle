@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.0.0-SNAPSHOT'
+    id 'org.springframework.boot' version '2.7.5'
     id 'io.spring.dependency-management' version '1.1.0'
 }
 
@@ -17,11 +17,6 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
 
-    // Sa-Token 权限认证，在线文档：https://sa-token.cc
-    implementation 'cn.dev33:sa-token-spring-boot-starter:1.32.0'
-    //jwt support
-    implementation 'cn.dev33:sa-token-jwt:1.32.0'
-
     implementation "org.springframework.boot:spring-boot-starter-json"
 
     //jpa
@@ -33,6 +28,10 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
     testCompileOnly 'org.projectlombok:lombok:1.18.24'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.24'
+
+    // Sa-Token,  Doc：https://sa-token.cc
+    implementation 'cn.dev33:sa-token-spring-boot-starter:1.33.0'
+    implementation 'cn.dev33:sa-token-dao-redis:1.33.0'  //Redis support
 
     //redis
     implementation 'org.springframework.boot:spring-boot-starter-redis:1.4.7.RELEASE'

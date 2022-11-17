@@ -6,4 +6,5 @@ import org.subit.sms.data.Account;
 
 @Repository
 public interface AccountRepo extends JpaRepository<Account, Integer> {
+    Account findAccountByUsernameAndDeletedIsFalse(String username);
 }

@@ -1,9 +1,10 @@
 package org.subit.sms.data;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 
 @Data
 @Entity
@@ -13,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class PlayList {
 
     @Column(name = "pid")
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private String id;
 

@@ -1,27 +1,28 @@
 package org.subit.sms.service;
 
-import org.subit.sms.dto.LoginDTO;
-import org.subit.sms.dto.Response;
+import org.subit.sms.data.Account;
 import org.subit.sms.dto.User;
+import org.subit.sms.handler.Exception.AccountInactivatedException;
+import org.subit.sms.handler.Exception.UserForbiddenException;
+import org.subit.sms.handler.Exception.UsernamePasswordNotMatchException;
 
 
 public interface AuthenticationService {
     /*
     provide login service
      */
-    boolean login(User user);
+    Account login(User user) throws UsernamePasswordNotMatchException, UserForbiddenException, AccountInactivatedException;
 
     /*
     logout user by username
      */
-    boolean logout(String username);
+    void logout();
 
     /*
     modify password
     user.password represent the new password due to frontend will check the same between new and old password
      */
-    boolean modifyPassword(User user);
-
+    void modifyPassword(User user);
 
     /*
     Service below provide Sign Up feature
@@ -29,10 +30,10 @@ public interface AuthenticationService {
     /*
     insert this user to database, and send the activate link to his email
      */
-    boolean SendCaptcha(User user, String email);
+    void SendCaptcha(User user, String email);
 
     /*
     verify the captcha and activate the account
      */
-    boolean activateAccount(String captcha);
+    void activateAccount(String captcha);
 }
