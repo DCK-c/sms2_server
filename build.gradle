@@ -22,12 +22,17 @@ dependencies {
     //jwt support
     implementation 'cn.dev33:sa-token-jwt:1.32.0'
 
+    implementation "org.springframework.boot:spring-boot-starter-json"
+
     //jpa
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.mariadb.jdbc:mariadb-java-client:3.0.6'
 
     //Lombok auto generate setter getter
-    implementation 'org.projectlombok:lombok:1.18.24'
+    compileOnly 'org.projectlombok:lombok:1.18.24'
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
+    testCompileOnly 'org.projectlombok:lombok:1.18.24'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.24'
 
     //redis
     implementation 'org.springframework.boot:spring-boot-starter-redis:1.4.7.RELEASE'

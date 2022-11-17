@@ -1,6 +1,7 @@
 package org.subit.sms.handler;
 
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.subit.sms.dto.Response;
 import org.subit.sms.dto.ReturnCode;

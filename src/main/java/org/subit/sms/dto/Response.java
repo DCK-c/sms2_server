@@ -1,8 +1,13 @@
 package org.subit.sms.dto;
 
-import lombok.Data;
+import lombok.*;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @Data
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Response<T> {
     private int code;
     private String message;
