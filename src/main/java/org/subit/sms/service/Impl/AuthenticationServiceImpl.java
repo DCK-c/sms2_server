@@ -1,18 +1,16 @@
 package org.subit.sms.service.Impl;
 
 import cn.dev33.satoken.stp.StpUtil;
-import com.sun.xml.bind.v2.schemagen.Util;
 import org.springframework.stereotype.Service;
 import org.subit.sms.data.Account;
 import org.subit.sms.data.repository.AccountRepo;
 import org.subit.sms.dto.User;
-import org.subit.sms.handler.Exception.AccountInactivatedException;
-import org.subit.sms.handler.Exception.UserForbiddenException;
-import org.subit.sms.handler.Exception.UsernamePasswordNotMatchException;
+import org.subit.sms.handler.Exception.*;
 import org.subit.sms.service.AuthenticationService;
 
 import javax.annotation.Resource;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
@@ -22,10 +20,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public Account login(User user) throws UsernamePasswordNotMatchException, UserForbiddenException, AccountInactivatedException {
-        Account loginTarget = accountRepo.findAccountByUsernameAndDeletedIsFalse(user.getUsername());
+        Account loginTarget = accountRepo.findAccountByUsernameAndDeletedIsFalse(user.getUsername())
+                .orElseThrow(UsernamePasswordNotMatchException::new);  // no data match in the database
 
-        // check username and password
-        if (loginTarget == null) throw new UsernamePasswordNotMatchException();
         if (!Objects.equals(loginTarget.getPassword(), user.getPassword()))
             throw new UsernamePasswordNotMatchException();
 
@@ -42,8 +39,16 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     @Override
-    public void modifyPassword(User user) {
+    public void modifyPassword(User user) throws UsernameNotFoundException, PasswordNotMatchException {
+        Account targetUser = accountRepo.findAccountByUsernameAndDeletedIsFalse(user.getUsername())
+                .orElseThrow(UsernameNotFoundException::new);
 
+        // check auth
+        if (!Objects.equals(targetUser.getPassword(), user.getCaptcha())) throw new PasswordNotMatchException();
+
+        //modify password
+        targetUser.setPassword(user.getPassword());
+        accountRepo.save(targetUser);
     }
 
     @Override

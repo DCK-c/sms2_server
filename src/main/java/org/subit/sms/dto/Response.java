@@ -20,4 +20,12 @@ public class Response {
         this.message = code.getMessage();
         this.data = data;
     }
+
+    public static Response success(Object data) {
+        return new Response(ReturnCode.Success, data);
+    }
+
+    public static Response error(ReturnCode error) {
+        return new Response(error, null);
+    }
 }

@@ -2,9 +2,7 @@ package org.subit.sms.service;
 
 import org.subit.sms.data.Account;
 import org.subit.sms.dto.User;
-import org.subit.sms.handler.Exception.AccountInactivatedException;
-import org.subit.sms.handler.Exception.UserForbiddenException;
-import org.subit.sms.handler.Exception.UsernamePasswordNotMatchException;
+import org.subit.sms.handler.Exception.*;
 
 
 public interface AuthenticationService {
@@ -22,7 +20,7 @@ public interface AuthenticationService {
     modify password
     user.password represent the new password due to frontend will check the same between new and old password
      */
-    void modifyPassword(User user);
+    void modifyPassword(User user) throws UsernameNotFoundException, PasswordNotMatchException;
 
     /*
     Service below provide Sign Up feature

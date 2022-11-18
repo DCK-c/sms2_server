@@ -9,11 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.subit.sms.data.Account;
 import org.subit.sms.dto.LoginDTO;
 import org.subit.sms.dto.Response;
-import org.subit.sms.dto.ReturnCode;
 import org.subit.sms.dto.User;
-import org.subit.sms.handler.Exception.AccountInactivatedException;
-import org.subit.sms.handler.Exception.UserForbiddenException;
-import org.subit.sms.handler.Exception.UsernamePasswordNotMatchException;
+import org.subit.sms.handler.Exception.*;
 import org.subit.sms.service.AuthenticationService;
 
 import javax.annotation.Resource;
@@ -34,19 +31,15 @@ public class AuthController {
             account.setRole(1);
             StpUtil.login(10001);
             SaTokenInfo tokenInfo = StpUtil.getTokenInfo();
-            return new Response(ReturnCode.Success, new LoginDTO(
+            return Response.success(new LoginDTO(
                     tokenInfo.tokenValue,
                     account.getUsername(),
                     account.getNickname(),
                     account.getEmail(),
                     account.getRole()
             ));
-        } catch (UsernamePasswordNotMatchException e) {
-            return new Response(ReturnCode.UsernamePasswordError, null);
-        } catch (UserForbiddenException e) {
-            return new Response(ReturnCode.UserForbidden, null);
-        } catch (AccountInactivatedException e) {
-            return new Response(ReturnCode.AccountInactivated, null);
+        } catch (AccountInactivatedException | UsernamePasswordNotMatchException | UserForbiddenException e) {
+            return Response.error(e.getReturnCode());
         }
     }
 
@@ -54,9 +47,18 @@ public class AuthController {
     public Response logout() {
         if (StpUtil.isLogin()) {
             authenticationService.logout();
-            return new Response(ReturnCode.Success, "logout successful");
-        } else {
-            return new Response(ReturnCode.Success, "You are not login");
+            return Response.success("logout successful");
+        } else return Response.success("You are not login");
+
+    }
+
+    @PostMapping("/modifyPassword")
+    public Response modifyPassword(@RequestBody User user) {
+        try {
+            authenticationService.modifyPassword(user);
+            return Response.success("Password Change Success");
+        } catch (UsernameNotFoundException | PasswordNotMatchException e) {
+            return Response.error(e.getReturnCode());
         }
     }
 
