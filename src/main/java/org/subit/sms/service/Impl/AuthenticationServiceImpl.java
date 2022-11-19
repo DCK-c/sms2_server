@@ -10,6 +10,7 @@ import freemarker.template.TemplateException;
 import freemarker.template.TemplateNotFoundException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,7 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import javax.transaction.Transactional;
 import java.io.IOException;
+import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -77,8 +79,11 @@ public class AuthenticationServiceImpl implements AuthorizationService {
     @Resource
     private JavaMailSender mailSender;
 
-    @Value("${sms.account.validate-base-url}")
+    @Value("${sms.account.validate.base-url}")
     private String baseUrl;
+
+    @Resource
+    RedisTemplate<Object, Object> redisTemplate;
 
     @Value("${spring.mail.username}")
     private String fromEmail;
@@ -99,7 +104,7 @@ public class AuthenticationServiceImpl implements AuthorizationService {
             helper.setTo(email);
             helper.setSubject("[SubIT]");
             helper.setText(templateHtml, true);
-//            redisTemplate.opsForValue().set(key, auth_code);
+            redisTemplate.opsForValue().set(key, auth_code, Duration.ofMinutes(10));
             mailSender.send(message);
         } catch (MessagingException | TemplateException | IOException e) {
             throw new CaptchaException();
