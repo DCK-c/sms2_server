@@ -5,7 +5,7 @@
 ### tech
 
 ```text
-springboot 3.0.0 + jpa + sa-token
+springboot 2.7.5 + jpa + sa-token
 ```
 
 后端使用MariaDB
