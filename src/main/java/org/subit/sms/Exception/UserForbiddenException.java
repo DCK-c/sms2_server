@@ -1,4 +1,4 @@
-package org.subit.sms.handler.Exception;
+package org.subit.sms.Exception;
 
 import org.subit.sms.dto.ReturnCode;
 

@@ -1,0 +1,14 @@
+{
+  "properties": [
+    {
+      "name": "sms.account.validate.base-url",
+      "type": "java.lang.String",
+      "description": "Description for sms.account.validate.base-url."
+    },
+    {
+      "name": "sms.account.validate.title",
+      "type": "java.lang.String",
+      "description": "Description for sms.account.validate.title."
+    }
+  ]
+}

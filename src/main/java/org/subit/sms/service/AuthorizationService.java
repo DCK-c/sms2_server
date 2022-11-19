@@ -1,11 +1,11 @@
 package org.subit.sms.service;
 
+import org.subit.sms.Exception.*;
 import org.subit.sms.data.Account;
 import org.subit.sms.dto.User;
-import org.subit.sms.handler.Exception.*;
 
 
-public interface AuthenticationService {
+public interface AuthorizationService {
     /*
     provide login service
      */
@@ -28,7 +28,7 @@ public interface AuthenticationService {
     /*
     insert this user to database, and send the activate link to his email
      */
-    void SendCaptcha(User user, String email);
+    void SendCaptcha(String username, String email) throws UsernameNotFoundException, CaptchaException;
 
     /*
     verify the captcha and activate the account

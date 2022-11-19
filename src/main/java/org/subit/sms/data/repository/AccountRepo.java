@@ -9,4 +9,5 @@ import java.util.Optional;
 @Repository
 public interface AccountRepo extends JpaRepository<Account, Integer> {
     Optional<Account> findAccountByUsernameAndDeletedIsFalse(String username);
+
 }

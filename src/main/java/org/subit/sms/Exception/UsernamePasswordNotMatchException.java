@@ -1,8 +1,9 @@
-package org.subit.sms.handler.Exception;
+package org.subit.sms.Exception;
 
 import org.subit.sms.dto.ReturnCode;
 
-public class UsernameNotFoundException extends SMSBaseException{
+public class UsernamePasswordNotMatchException extends AuthException {
+
     @Override
     public ReturnCode getReturnCode() {
         return ReturnCode.UsernamePasswordNotMatch;
