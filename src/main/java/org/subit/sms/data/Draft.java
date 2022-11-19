@@ -1,17 +1,19 @@
 package org.subit.sms.data;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Entity
 @Table(name = "drafts")
 @AllArgsConstructor
-@NoArgsConstructor
 public class Draft {
 
     @Column(name = "did")
@@ -21,6 +23,7 @@ public class Draft {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "uid", nullable = false)
+    @ToString.Exclude
     private Account author;
 
     @Column(name = "title", nullable = false)

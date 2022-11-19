@@ -88,6 +88,9 @@ public class AuthenticationServiceImpl implements AuthorizationService {
     @Value("${spring.mail.username}")
     private String fromEmail;
 
+    @Value("${sms.account.validate.title}")
+    private String mailTitle;
+
     @Override
     public void SendCaptcha(String username, String email) throws UsernameNotFoundException, CaptchaException {
         if (Objects.isNull(username)) throw new UsernameNotFoundException();
@@ -102,7 +105,7 @@ public class AuthenticationServiceImpl implements AuthorizationService {
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
             helper.setFrom(fromEmail);
             helper.setTo(email);
-            helper.setSubject("[SubIT]");
+            helper.setSubject(mailTitle);
             helper.setText(templateHtml, true);
             redisTemplate.opsForValue().set(key, auth_code, Duration.ofMinutes(10));
             mailSender.send(message);

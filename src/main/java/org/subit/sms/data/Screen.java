@@ -1,16 +1,18 @@
 package org.subit.sms.data;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.util.Objects;
 
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Entity
 @Table(name = "screen")
 @AllArgsConstructor
-@NoArgsConstructor
 public class Screen {
     @Column(name = "sid")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,4 +24,17 @@ public class Screen {
 
     @Column(name = "height", nullable = false)
     private int height;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Screen screen = (Screen) o;
+        return id != null && Objects.equals(id, screen.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

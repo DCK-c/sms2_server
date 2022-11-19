@@ -1,10 +1,12 @@
 package org.subit.sms.data;
 
 import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.util.Objects;
 
-@Data
+@ToString
 @Entity
 @Table(name = "users")
 @AllArgsConstructor
@@ -54,4 +56,5 @@ public class Account {
 
     @Column(name = "activated")
     private boolean activated;
+
 }

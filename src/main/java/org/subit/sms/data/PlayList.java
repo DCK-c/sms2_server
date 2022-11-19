@@ -1,16 +1,18 @@
 package org.subit.sms.data;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.util.Objects;
 
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Entity
 @Table(name = "play_list")
 @AllArgsConstructor
-@NoArgsConstructor
 public class PlayList {
 
     @Column(name = "pid")
@@ -34,4 +36,17 @@ public class PlayList {
      */
     @Column(name = "priority")
     private int priority;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        PlayList playList = (PlayList) o;
+        return id != null && Objects.equals(id, playList.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }
